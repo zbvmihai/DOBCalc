@@ -52,11 +52,11 @@
         android:textColor="@color/textGray" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tvSelectedDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="14/9/2021"
+        android:text=""
         android:textColor="@color/textBlue"
         android:textSize="16sp"
 
