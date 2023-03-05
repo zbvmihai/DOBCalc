@@ -7,11 +7,13 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import org.w3c.dom.Text
-import java.util.Calendar
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
     private var tvSelectedDate: TextView? = null
+    private var tvAgeInMinutes: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,6 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         val btnDatePicker: Button = findViewById(R.id.btnDatePicker)
         tvSelectedDate = findViewById(R.id.tvSelectedDate)
+        tvAgeInMinutes = findViewById(R.id.tvAgeInMinutes)
 
         btnDatePicker.setOnClickListener {
             clickDatePicker()
@@ -37,6 +40,20 @@ class MainActivity : AppCompatActivity() {
 
                 val selectedDate = "$selectedDay/${selectedMonth+1}/$selectedYear"
                 tvSelectedDate?.text = selectedDate
+
+                val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
+
+                val theDate = sdf.parse(selectedDate)
+
+                val selectedDateInMinutes = theDate.time / 60000
+
+                val currentDate = sdf.parse(sdf.format(System.currentTimeMillis()))
+
+                val currentDateInMinutes = currentDate.time / 60000
+
+                val differenceInMinutes = currentDateInMinutes - selectedDateInMinutes
+
+                tvAgeInMinutes?.text = differenceInMinutes.toString()
             },
             year,
             month,
